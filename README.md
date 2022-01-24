@@ -6,15 +6,15 @@ Currently the sample container has both the S3 plugin as well as the Elasticsear
 Deployment to a Kubernetes cluster is maintained by a DaemonSet. The DaemonSet requires a ConfigMap to pass parameters to the DaemonSet.
 
 1.	Create bucket in S3 changing the value of 'test_bucket' to your unique bucket name:
-2.	
+	
 $ aws s3api create-bucket --bucket test_bucket --region us-east-1
 
 2.	Edit the file 's3_iam_role.json' and update the value '{YOUR_BUCKET}' with the value of the bucket created in the previous step. In the following example my bucket name is 'test_bucket':
-3.	
+	
 $ sed 's/{YOUR_BUCKET}/test_bucket/g' s3_iam_role.json > s3_iam_role_complete.json
 
 3.	Create an IAM policy to allow access to the S3 bucket:
-4.	
+	
 $ aws iam create-policy --policy-name kubernetes-fluentd-s3-logging --policy-document file://s3_iam_role_complete.json
 
 4.	Attach the policy to the IAM Role for the Kubernetes workers:

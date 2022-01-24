@@ -1,5 +1,4 @@
-# Fluentd-Logging
-
+                                                                  # Kubernetes logging using fluentd
 Kubernetes Logger is designed to take all of the logs from your containers and system and forward them to a central location. Today this can be a S3 bucket in AWS or a ElasticSearch cluster (or both). The logger is intended to be a DaemonSet which will run a pod on each Node in your cluster. Fluentd is the forwarder agent which has a configuration file to configure the different output destinations for your logs.
 Currently the sample container has both the S3 plugin as well as the Elasticsearch plugin installed by default. Please customize the fluent.conf to your satisfaction to enable or disable one or the other.
 Deployment
@@ -11,10 +10,10 @@ $ sed 's/{YOUR_BUCKET}/test_bucket/g' s3_iam_role.json > s3_iam_role_complete.js
 3.	Create an IAM policy to allow access to the S3 bucket:
 $ aws iam create-policy --policy-name kubernetes-fluentd-s3-logging --policy-document file://s3_iam_role_complete.json
 4.	Attach the policy to the IAM Role for the Kubernetes workers:
-# Find RoleName for the worker role
+    Find RoleName for the worker role
 $ aws iam list-roles | grep -i iamroleworker
 
-# Attach policy
+    Attach policy
 $ aws iam attach-role-policy --policy-arn <ARN_of_policy_created_in_previous_step> --role-name <RoleName>
 5.	Create the ConfigMap specifying the correct values for your environment:
 

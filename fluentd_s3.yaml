@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: fluentd
-        image:  fluentd
+        image: upmcenterprises/fluentd:0.0.2
         imagePullPolicy: Always
         resources:
           limits:
